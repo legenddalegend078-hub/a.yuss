@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { SplineSceneBasic } from "@/components/ui/demo";
 import { Navbar } from "@/components/ui/navbar";
 import DemoOne from "@/components/ui/feature-demo";
@@ -40,6 +41,8 @@ export default function App() {
       </main>
 
       <Footer />
+      
+      <SpeedInsights />
     </div>
   );
 }
