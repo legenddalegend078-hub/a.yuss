@@ -1,9 +1,19 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, MessageCircle, Facebook, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { FlipCard } from '@/components/ui/flip-card';
+import { Instagram, MessageCircle, Facebook, Mail, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { TextReveal } from '@/components/ui/text-reveal';
 
 const contactCards = [
+  {
+    label: "Email",
+    username: "gamingng26@gmail.com",
+    description: "Send me an email for professional inquiries, project proposals, or any direct communication.",
+    button: "Send Email",
+    icon: Mail,
+    href: "mailto:gamingng26@gmail.com"
+  },
   {
     label: "Instagram",
     username: "@a.yuss__",
@@ -92,18 +102,17 @@ export function ContactSection() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-200 to-white">Something</span><br />
             Extraordinary
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mt-12 text-[#D7E2EA] text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed"
-          >
-            If you want a modern cinematic website, futuristic portfolio, 3D interactive experience, or creative digital project, feel free to contact me. I focus on building immersive and visually powerful experiences.
-          </motion.p>
+          <div className="mt-12">
+            <TextReveal 
+              text="If you want a modern cinematic website, futuristic portfolio, 3D interactive experience, or creative digital project, feel free to contact me. I focus on building immersive and visually powerful experiences."
+              className="text-[#D7E2EA] text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed justify-center"
+              mode="dimming"
+            />
+          </div>
         </div>
 
         {/* Contact Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
           {contactCards.map((card, i) => (
             <motion.a
               key={card.label}
@@ -139,40 +148,60 @@ export function ContactSection() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingData.map((plan, i) => (
-              <motion.div
-                key={plan.title}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`p-10 rounded-[48px] bg-white/[0.02] border border-white/5 relative overflow-hidden flex flex-col ${i === 1 ? 'md:scale-105 bg-white/[0.04] border-white/20' : ''}`}
-              >
-                {i === 1 && (
-                  <div className="absolute top-8 right-8 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] uppercase font-bold tracking-widest">
-                    Best Value
+            {pricingData.map((plan, i) => {
+              const FrontContent = (
+                <div className="flex flex-col items-center justify-center h-full w-full">
+                  {i === 1 && (
+                    <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] uppercase font-bold tracking-widest">
+                      Best Value
+                    </div>
+                  )}
+                  <h4 className="text-neutral-400 text-sm font-mono mb-4">{plan.title}</h4>
+                  <div className="flex items-baseline gap-1 mb-2">
+                    <span className="text-5xl font-bold text-white tracking-tight">{plan.price}</span>
                   </div>
-                )}
-                <h4 className="text-neutral-400 text-sm font-mono mb-4">{plan.title}</h4>
-                <div className="flex items-baseline gap-1 mb-10">
-                  <span className="text-4xl md:text-6xl font-bold text-white tracking-tight">{plan.price}</span>
-                  {plan.price !== 'Custom' && <span className="text-neutral-600 text-sm font-light italic">/ starting from</span>}
+                  {plan.price !== 'Custom' && <span className="text-neutral-500 text-sm font-light italic">/ starting from</span>}
+                  
+                  <div className="mt-8 text-xs text-white/40 uppercase tracking-widest flex items-center gap-2">
+                    Hover to view details <ArrowUpRight className="w-3 h-3" />
+                  </div>
                 </div>
-                
-                <ul className="space-y-4 mb-10">
-                  {plan.features.map(feat => (
-                    <li key={feat} className="flex items-center gap-3 text-neutral-400 text-sm font-light">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500/50" />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
+              );
 
-                <button className="w-full py-4 rounded-3xl bg-white/5 hover:bg-white text-neutral-400 hover:text-black text-sm font-bold transition-all mt-auto border border-white/5 hover:border-white">
-                  Get Started
-                </button>
-              </motion.div>
-            ))}
+              const BackContent = (
+                <div className="flex flex-col items-center justify-between h-full w-full pt-4">
+                  <h4 className="text-white text-lg font-bold mb-6 italic">{plan.title}</h4>
+                  <ul className="space-y-3 mb-6 w-full text-left flex-1 flex flex-col justify-center">
+                    {plan.features.map(feat => (
+                      <li key={feat} className="flex items-center justify-center gap-3 text-neutral-300 text-sm font-light">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500/50 flex-none" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="w-full py-3 rounded-2xl bg-white/10 hover:bg-white text-white hover:text-black text-sm font-bold transition-all border border-white/10 hover:border-white">
+                    Get Started
+                  </button>
+                </div>
+              );
+
+              return (
+                <motion.div
+                  key={plan.title}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={i === 1 ? 'md:scale-105 relative z-10' : ''}
+                >
+                  <FlipCard 
+                    frontBackground={i === 1 ? "bg-white/[0.04] border-emerald-500/20" : "bg-white/[0.02]"}
+                    frontContent={FrontContent}
+                    backContent={BackContent}
+                  />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 

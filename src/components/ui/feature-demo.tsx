@@ -3,6 +3,7 @@ import React from 'react';
 import { Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { FeatureCard } from '@/components/ui/grid-feature-cards';
+import { TextReveal } from '@/components/ui/text-reveal';
 
 const features = [
 	{
@@ -51,9 +52,13 @@ export default function DemoOne() {
 						Future <br />
 						<span className="text-transparent bg-clip-text bg-gradient-to-l from-[#6366f1] via-[#a855f7] to-[#fcd34d]">Experiences</span>
 					</h2>
-					<p className="text-neutral-400 mt-8 text-lg md:text-xl tracking-wide text-balance max-w-2xl mx-auto font-light leading-relaxed">
-						Creating cinematic websites, futuristic portfolios, immersive UI experiences, and powerful modern digital projects with creativity, motion, and technology.
-					</p>
+					<div className="mt-8">
+						<TextReveal 
+							text="Creating cinematic websites, futuristic portfolios, immersive UI experiences, and powerful modern digital projects with creativity, motion, and technology."
+							className="text-neutral-400 text-lg md:text-xl tracking-wide text-balance max-w-2xl mx-auto font-light leading-relaxed justify-center"
+							mode="dimming"
+						/>
+					</div>
 				</AnimatedContainer>
 
 				<AnimatedContainer
@@ -69,9 +74,13 @@ export default function DemoOne() {
 					<h3 className="text-white font-display text-4xl md:text-5xl font-bold mb-8 italic">
 						What This Website Represents
 					</h3>
-					<p className="text-neutral-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed mb-24">
-						This portfolio represents creativity, technology, cinematic motion, futuristic design, and immersive digital storytelling. Every section is designed to feel modern, smooth, interactive, and visually unforgettable.
-					</p>
+					<div className="mb-24">
+						<TextReveal 
+							text="This portfolio represents creativity, technology, cinematic motion, futuristic design, and immersive digital storytelling. Every section is designed to feel modern, smooth, interactive, and visually unforgettable."
+							className="text-neutral-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed justify-center"
+							mode="dimming"
+						/>
+					</div>
 
           <div className="w-full overflow-hidden relative py-12">
             <div className="flex gap-12 animate-marquee whitespace-nowrap">

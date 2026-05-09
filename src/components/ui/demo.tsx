@@ -4,7 +4,8 @@ import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
- 
+import { TextReveal } from "@/components/ui/text-reveal"
+
 export function SplineSceneBasic() {
   return (
     <div className="w-full min-h-[700px] md:min-h-[600px] md:h-[600px] relative overflow-hidden flex flex-col md:flex-row rounded-3xl border border-white/10 bg-black/40 backdrop-blur-3xl shadow-2xl shadow-white/5">
@@ -14,8 +15,26 @@ export function SplineSceneBasic() {
       />
       
       <div className="flex flex-col md:flex-row w-full flex-1 relative z-10">
-        {/* Left content */}
-        <div className="flex-none md:flex-1 p-8 pt-12 pb-4 md:p-16 md:pt-16 md:pb-16 relative z-10 flex flex-col justify-center items-center text-center md:items-start md:text-left">
+        {/* Left content with cinematic background image */}
+        <div className="flex-none md:flex-1 p-8 pt-12 pb-4 md:p-16 md:pt-16 md:pb-16 relative z-10 flex flex-col justify-center items-center text-center md:items-start md:text-left overflow-hidden">
+          
+          {/* Subtle Background Portrait for Left Side */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute inset-0 z-[-1] pointer-events-none"
+          >
+            <img 
+              src="/ChatGPT Image May 8, 2026, 08_11_03 PM.png" 
+              alt="Ayush Background"
+              className="w-full h-full object-cover object-center mix-blend-luminosity grayscale opacity-60"
+            />
+            {/* Gradient masks to blend the image into the black background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/60" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-black/80" />
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -45,14 +64,12 @@ export function SplineSceneBasic() {
             Python Developer • Node.js Developer • React Enthusiast • Linux Explorer
           </motion.p>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="mt-6 text-neutral-400 max-w-[280px] sm:max-w-[320px] md:max-w-lg text-[15px] md:text-lg leading-relaxed font-light"
-          >
-            I am a passionate tech enthusiast from Bharatpur, Chitwan, Nepal. I enjoy building modern applications, exploring Linux systems, creating interactive experiences, and learning new technologies. I love coding, problem-solving, and designing creative digital projects.
-          </motion.p>
+          <div className="mt-6">
+            <TextReveal 
+              text="I am a passionate tech enthusiast from Bharatpur, Chitwan, Nepal. I enjoy building modern applications, exploring Linux systems, creating interactive experiences, and learning new technologies. I love coding, problem-solving, and designing creative digital projects."
+              className="text-neutral-400 max-w-[280px] sm:max-w-[320px] md:max-w-lg text-[15px] md:text-lg leading-relaxed font-light"
+            />
+          </div>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

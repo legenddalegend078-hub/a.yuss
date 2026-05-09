@@ -22,21 +22,21 @@ export default function App() {
       <Navbar />
       
       <main className="w-full flex flex-col items-center relative z-10">
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-16 md:pt-40 md:pb-24">
+        <section id="home" className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-16 md:pt-40 md:pb-24">
           <SplineSceneBasic />
-        </div>
+        </section>
         
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section id="features" className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <DemoOne />
-        </div>
+        </section>
 
-        <div className="w-full">
+        <section id="projects" className="w-full">
           <OutfitSection />
-        </div>
+        </section>
 
-        <div className="w-full">
+        <section id="skills" className="w-full">
           <ContactSection />
-        </div>
+        </section>
       </main>
 
       <Footer />

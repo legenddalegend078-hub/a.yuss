@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import { TextReveal } from '@/components/ui/text-reveal';
 
 const outfitCards = [
   {
@@ -63,15 +64,13 @@ export function OutfitSection() {
             Minimal Style.<br />
             Maximum Presence.
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-neutral-400 text-lg md:text-xl max-w-2xl font-body font-light leading-relaxed"
-          >
-            My fashion style combines modern streetwear, cinematic aesthetics, and futuristic minimalism. I prefer clean dark outfits, premium layering, and timeless styles that feel confident, calm, and visually powerful.
-          </motion.p>
+          <div className="mt-8">
+            <TextReveal 
+              text="My fashion style combines modern streetwear, cinematic aesthetics, and futuristic minimalism. I prefer clean dark outfits, premium layering, and timeless styles that feel confident, calm, and visually powerful."
+              className="text-neutral-400 text-lg md:text-xl max-w-2xl font-body font-light leading-relaxed"
+              mode="dimming"
+            />
+          </div>
         </div>
 
         {/* Categories Section */}
@@ -84,13 +83,13 @@ export function OutfitSection() {
             >
               Style Identity
             </motion.h3>
-            <motion.p
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="text-neutral-400 text-lg md:text-2xl font-serif italic max-w-2xl leading-relaxed"
-            >
-              My style focuses on simplicity, confidence, and clean aesthetics. I enjoy dark tones, oversized silhouettes, premium textures, and cinematic outfit combinations inspired by futuristic fashion and modern design culture.
-            </motion.p>
+            <div className="max-w-2xl">
+              <TextReveal 
+                text="My style focuses on simplicity, confidence, and clean aesthetics. I enjoy dark tones, oversized silhouettes, premium textures, and cinematic outfit combinations inspired by futuristic fashion and modern design culture."
+                className="text-neutral-400 text-lg md:text-2xl font-serif italic leading-relaxed"
+                mode="dimming"
+              />
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {outfitCards.map((card, i) => (
@@ -159,11 +158,11 @@ export function OutfitSection() {
               >
                 <img 
                   src={img} 
-                  className="w-full h-auto object-cover transition-transform duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0"
+                  className="w-full h-auto object-cover transition-all duration-700 md:group-hover:scale-110 grayscale md:group-hover:grayscale-0 group-active:grayscale-0"
                   alt={`Style Gallery ${i}`}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-10">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 md:group-hover:opacity-100 group-active:opacity-100 transition-opacity flex items-end p-10">
                   <p className="text-white font-serif italic text-2xl">Shot {i + 1}</p>
                 </div>
               </motion.div>
