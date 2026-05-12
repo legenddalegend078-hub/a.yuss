@@ -88,9 +88,9 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-500 ${scrolled ? 'top-2 md:top-4' : ''}`}
+        className={`fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-500 ${scrolled ? 'top-2 md:top-3' : 'top-4 md:top-6'}`}
       >
-        <div className="flex items-center justify-between px-4 md:px-6 py-3 md:py-4 rounded-full bg-black/40 border border-white/10 backdrop-blur-xl shadow-2xl shadow-black/50">
+        <div className={`flex items-center justify-between px-4 md:px-6 py-3 md:py-4 rounded-full border border-white/10 backdrop-blur-2xl shadow-2xl transition-all duration-500 ${scrolled ? 'bg-black/70 shadow-black/80' : 'bg-black/40 shadow-black/50'}`}>
           {/* Logo */}
           <button
             onClick={() => scrollToSection('home')}

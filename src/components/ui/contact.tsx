@@ -2,8 +2,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FlipCard } from '@/components/ui/flip-card';
+import { GlowingCard } from '@/components/ui/glowing-card';
+import { NeonButton } from '@/components/ui/neon-button';
 import { Instagram, MessageCircle, Facebook, Mail, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { TextReveal } from '@/components/ui/text-reveal';
+import { AnimatedTitle } from '@/components/ui/animated-title';
+import { CountUp } from '@/components/ui/count-up';
 
 const contactCards = [
   {
@@ -93,15 +97,13 @@ export function ContactSection() {
           >
             // Contact
           </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-[120px] font-black text-white leading-none tracking-tight uppercase"
-          >
-            Let's Build<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-200 to-white">Something</span><br />
-            Extraordinary
-          </motion.h2>
+          <h2 className="text-5xl md:text-[120px] font-black text-white leading-none tracking-tight uppercase">
+            <AnimatedTitle text="Let's Build" /><br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-emerald-200 to-white">
+              <AnimatedTitle text="Something" />
+            </span><br />
+            <AnimatedTitle text="Extraordinary" />
+          </h2>
           <div className="mt-12">
             <TextReveal 
               text="If you want a modern cinematic website, futuristic portfolio, 3D interactive experience, or creative digital project, feel free to contact me. I focus on building immersive and visually powerful experiences."
@@ -114,36 +116,39 @@ export function ContactSection() {
         {/* Contact Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
           {contactCards.map((card, i) => (
-            <motion.a
+            <motion.div
               key={card.label}
-              href={card.href}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group relative p-10 rounded-[40px] bg-white/[0.03] border border-white/10 hover:border-emerald-500/30 backdrop-blur-3xl overflow-hidden transition-all hover:-translate-y-2 flex flex-col items-center text-center"
             >
-              <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5 group-hover:scale-110 transition-transform">
-                <card.icon className="w-8 h-8 text-white" />
-              </div>
-              <p className="text-emerald-400 text-xs font-mono mb-2">{card.label}</p>
-              <h4 className="text-xl font-bold text-white mb-4 italic font-display">{card.username}</h4>
-              <p className="text-neutral-500 text-sm font-light mb-8 leading-relaxed max-w-[200px]">
-                {card.description}
-              </p>
-              <div className="mt-auto inline-flex items-center gap-2 text-white text-sm font-medium border-b border-white/20 group-hover:border-emerald-500/50 pb-1 transition-all">
-                {card.button} <ArrowUpRight className="w-4 h-4 opacity-50" />
-              </div>
-            </motion.a>
+              <GlowingCard className="h-full">
+                <a
+                  href={card.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-10 rounded-[40px] bg-white/[0.03] border border-white/10 hover:border-emerald-500/30 backdrop-blur-3xl overflow-hidden transition-all hover:-translate-y-2 flex flex-col items-center text-center h-full"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/5 group-hover:scale-110 transition-transform">
+                    <card.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <p className="text-emerald-400 text-xs font-mono mb-2">{card.label}</p>
+                  <h4 className="text-xl font-bold text-white mb-4 italic font-display">{card.username}</h4>
+                  <p className="text-neutral-500 text-sm font-light mb-8 leading-relaxed max-w-[200px]">{card.description}</p>
+                  <div className="mt-auto inline-flex items-center gap-2 text-white text-sm font-medium border-b border-white/20 group-hover:border-emerald-500/50 pb-1 transition-all">
+                    {card.button} <ArrowUpRight className="w-4 h-4 opacity-50" />
+                  </div>
+                </a>
+              </GlowingCard>
+            </motion.div>
           ))}
         </div>
 
         {/* Pricing Section */}
         <div className="mb-32">
           <div className="text-center mb-16">
-            <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">Project Pricing</h3>
+            <h3 className="text-3xl md:text-5xl font-display font-bold text-white mb-4"><AnimatedTitle text="Project Pricing" /></h3>
             <p className="text-neutral-500 font-light italic">Flexible pricing based on design complexity, animations, and features.</p>
           </div>
           
@@ -158,7 +163,15 @@ export function ContactSection() {
                   )}
                   <h4 className="text-neutral-400 text-sm font-mono mb-4">{plan.title}</h4>
                   <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-5xl font-bold text-white tracking-tight">{plan.price}</span>
+                    {plan.price === 'Custom' ? (
+                      <span className="text-5xl font-bold text-white tracking-tight">{plan.price}</span>
+                    ) : (
+                      <CountUp 
+                        to={parseInt(plan.price.replace('$', ''))} 
+                        prefix="$" 
+                        className="text-5xl font-bold text-white tracking-tight" 
+                      />
+                    )}
                   </div>
                   {plan.price !== 'Custom' && <span className="text-neutral-500 text-sm font-light italic">/ starting from</span>}
                   
@@ -194,11 +207,13 @@ export function ContactSection() {
                   transition={{ delay: i * 0.1 }}
                   className={i === 1 ? 'md:scale-105 relative z-10' : ''}
                 >
-                  <FlipCard 
-                    frontBackground={i === 1 ? "bg-white/[0.04] border-emerald-500/20" : "bg-white/[0.02]"}
-                    frontContent={FrontContent}
-                    backContent={BackContent}
-                  />
+                  <GlowingCard className="h-full">
+                    <FlipCard 
+                      frontBackground={i === 1 ? "bg-white/[0.04] border-emerald-500/20" : "bg-white/[0.02]"}
+                      frontContent={FrontContent}
+                      backContent={BackContent}
+                    />
+                  </GlowingCard>
                 </motion.div>
               );
             })}
@@ -207,20 +222,16 @@ export function ContactSection() {
 
         {/* Final CTA */}
         <div className="text-center py-24 relative overflow-hidden rounded-[80px] bg-gradient-to-b from-white/[0.03] to-transparent">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-3xl md:text-6xl font-display font-medium text-white mb-12 italic"
-          >
-            Ready to create something unforgettable?
-          </motion.h2>
+          <h2 className="text-3xl md:text-6xl font-display font-medium text-white mb-12 italic">
+            <AnimatedTitle text="Ready to create something unforgettable?" />
+          </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button className="px-10 py-5 rounded-full bg-white text-black font-bold text-base hover:scale-105 transition-all shadow-white/20 shadow-2xl">
-              Start a Project
-            </button>
-            <button className="px-10 py-5 rounded-full border border-white/10 text-white hover:bg-white/5 transition-all">
-              Contact Me
-            </button>
+            <a href="https://wa.me/9779764354363" target="_blank" rel="noopener noreferrer">
+              <NeonButton label="Start a Project" hoverText="Let's Build!" variant="primary" className="px-10 py-5 text-base" />
+            </a>
+            <a href="https://instagram.com/a.yuss__" target="_blank" rel="noopener noreferrer">
+              <NeonButton label="Contact Me" hoverText="@a.yuss__" variant="outline" className="px-10 py-5 text-base" />
+            </a>
           </div>
         </div>
       </div>

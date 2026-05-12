@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { FlipCard } from '@/components/ui/flip-card';
+import { GlowingCard } from '@/components/ui/glowing-card';
 
 type FeatureType = {
 	title: string;
@@ -11,11 +13,7 @@ type FeatureCardProps = React.ComponentProps<'div'> & {
 	feature: FeatureType;
 };
 
-import { FlipCard } from '@/components/ui/flip-card';
-
 export function FeatureCard({ feature, className, ...props }: FeatureCardProps) {
-	const p = genRandomPattern();
-
 	const FrontContent = (
 		<div className="flex flex-col items-center justify-center h-full gap-4">
 			<div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-all duration-500">
@@ -36,13 +34,13 @@ export function FeatureCard({ feature, className, ...props }: FeatureCardProps) 
 	);
 
 	return (
-		<div className={className} {...props}>
+		<GlowingCard className={cn('h-full', className)} {...props}>
 			<FlipCard 
 				frontBackground="bg-white/[0.02]"
 				frontContent={FrontContent}
 				backContent={BackContent}
 			/>
-		</div>
+		</GlowingCard>
 	);
 }
 

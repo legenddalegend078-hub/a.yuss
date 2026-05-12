@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TextReveal } from '@/components/ui/text-reveal';
+import { AnimatedTitle } from '@/components/ui/animated-title';
 
 const outfitCards = [
   {
@@ -54,16 +55,10 @@ export function OutfitSection() {
           >
             // Personal Style
           </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-8xl font-serif font-bold text-white mb-8 leading-tight italic"
-          >
-            Minimal Style.<br />
-            Maximum Presence.
-          </motion.h2>
+          <h2 className="text-5xl md:text-8xl font-serif font-bold text-white mb-8 leading-tight italic">
+            <AnimatedTitle text="Minimal Style." /><br />
+            <AnimatedTitle text="Maximum Presence." />
+          </h2>
           <div className="mt-8">
             <TextReveal 
               text="My fashion style combines modern streetwear, cinematic aesthetics, and futuristic minimalism. I prefer clean dark outfits, premium layering, and timeless styles that feel confident, calm, and visually powerful."
@@ -141,7 +136,7 @@ export function OutfitSection() {
               >
                 // Gallery
               </motion.p>
-              <h3 className="text-white font-serif italic text-5xl md:text-7xl font-bold mb-4">Visual Identity</h3>
+              <h3 className="text-white font-serif italic text-5xl md:text-7xl font-bold mb-4"><AnimatedTitle text="Visual Identity" /></h3>
               <p className="text-neutral-500 max-w-md font-body font-light">A cinematic collection of personal fashion, aesthetics, and modern style.</p>
             </div>
           </div>

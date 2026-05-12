@@ -4,6 +4,7 @@ import { Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles } from 'lucide-react
 import { motion, useReducedMotion } from 'framer-motion';
 import { FeatureCard } from '@/components/ui/grid-feature-cards';
 import { TextReveal } from '@/components/ui/text-reveal';
+import { AnimatedTitle } from '@/components/ui/animated-title';
 
 const features = [
 	{
@@ -49,8 +50,10 @@ export default function DemoOne() {
 						Core Features
 					</div>
 					<h2 className="text-5xl font-extrabold tracking-tight text-balance md:text-6xl lg:text-8xl text-white leading-none">
-						Future <br />
-						<span className="text-transparent bg-clip-text bg-gradient-to-l from-[#6366f1] via-[#a855f7] to-[#fcd34d]">Experiences</span>
+						<AnimatedTitle text="Future " /><br />
+						<span className="text-transparent bg-clip-text bg-gradient-to-l from-[#6366f1] via-[#a855f7] to-[#fcd34d]">
+							<AnimatedTitle text="Experiences" />
+						</span>
 					</h2>
 					<div className="mt-8">
 						<TextReveal 
@@ -72,7 +75,7 @@ export default function DemoOne() {
 
 				<AnimatedContainer delay={0.4} className="pt-32 pb-16 text-center border-t border-white/5">
 					<h3 className="text-white font-display text-4xl md:text-5xl font-bold mb-8 italic">
-						What This Website Represents
+						<AnimatedTitle text="What This Website Represents" />
 					</h3>
 					<div className="mb-24">
 						<TextReveal 

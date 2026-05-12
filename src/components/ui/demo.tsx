@@ -3,8 +3,22 @@
 import { SplineScene } from "@/components/ui/splite";
 import { Spotlight } from "@/components/ui/spotlight"
 import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Instagram } from "lucide-react"
 import { TextReveal } from "@/components/ui/text-reveal"
+import { AnimatedTitle } from "@/components/ui/animated-title"
+import { CountUp } from "@/components/ui/count-up"
+import { NeonButton } from "@/components/ui/neon-button"
+
+const stats = [
+  { label: 'Projects Built', value: 20, prefix: '' },
+  { label: 'Technologies', value: 12, prefix: '' },
+  { label: 'GitHub Repos', value: 35, prefix: '' },
+];
+
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 export function SplineSceneBasic() {
   return (
@@ -15,10 +29,10 @@ export function SplineSceneBasic() {
       />
       
       <div className="flex flex-col md:flex-row w-full flex-1 relative z-10">
-        {/* Left content with cinematic background image */}
+        {/* Left content */}
         <div className="flex-none md:flex-1 p-8 pt-12 pb-4 md:p-16 md:pt-16 md:pb-16 relative z-10 flex flex-col justify-center items-center text-center md:items-start md:text-left overflow-hidden">
           
-          {/* Subtle Background Portrait for Left Side */}
+          {/* Subtle Background Portrait */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
@@ -30,11 +44,11 @@ export function SplineSceneBasic() {
               alt="Ayush Background"
               className="w-full h-full object-cover object-center mix-blend-luminosity grayscale opacity-60"
             />
-            {/* Gradient masks to blend the image into the black background */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/60" />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-black/80" />
           </motion.div>
 
+          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -45,15 +59,16 @@ export function SplineSceneBasic() {
             // Personal Portfolio
           </motion.div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-200 to-neutral-500 tracking-tight leading-[1.1]"
-          >
-            Hi, I'm <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-600">Ayush Duwadi</span>
-          </motion.h1>
+          {/* Hero Title */}
+          <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-200 to-neutral-500">
+              <AnimatedTitle text="Hi, I'm" />
+            </span>{' '}
+            <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 to-neutral-600">
+              <AnimatedTitle text="Ayush Duwadi" />
+            </span>
+          </h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -66,36 +81,71 @@ export function SplineSceneBasic() {
 
           <div className="mt-6">
             <TextReveal 
-              text="I am a passionate tech enthusiast from Bharatpur, Chitwan, Nepal. I enjoy building modern applications, exploring Linux systems, creating interactive experiences, and learning new technologies. I love coding, problem-solving, and designing creative digital projects."
+              text="I am a passionate tech enthusiast from Bharatpur, Chitwan, Nepal. I enjoy building modern applications, exploring Linux systems, creating interactive experiences, and learning new technologies."
               className="text-neutral-400 max-w-[280px] sm:max-w-[320px] md:max-w-lg text-[15px] md:text-lg leading-relaxed font-light"
             />
           </div>
 
+          {/* CountUp Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
+            className="mt-8 flex items-center gap-6 md:gap-8"
+          >
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center md:items-start">
+                <span className="text-2xl md:text-3xl font-extrabold text-white">
+                  <CountUp to={stat.value} from={0} duration={2.5} prefix={stat.prefix} />
+                  <span className="text-purple-400">+</span>
+                </span>
+                <span className="text-neutral-500 text-xs font-medium mt-0.5">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+            className="mt-8 flex flex-col sm:flex-row items-center gap-3"
           >
-            <button className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-medium text-black bg-white rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
-              <span className="relative z-10">About Me</span>
-              <ArrowRight className="relative z-10 size-4 transition-transform group-hover:translate-x-1" />
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-neutral-200 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
-            <button className="px-8 py-3.5 text-sm font-medium text-white rounded-full border border-white/10 hover:bg-white/5 transition-colors">
-              Projects
-            </button>
-            <button className="px-8 py-3.5 text-sm font-medium text-white/60 hover:text-white transition-colors">
-              Contact
-            </button>
+            {/* About Me → links to Instagram */}
+            <a
+              href="https://instagram.com/a.yuss__"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <NeonButton
+                label="About Me"
+                hoverText="@a.yuss__"
+                variant="primary"
+              />
+            </a>
+
+            {/* Projects → scroll to projects section */}
+            <NeonButton
+              label="Projects"
+              hoverText="View Work"
+              variant="outline"
+              onClick={() => scrollToSection('projects')}
+            />
+
+            {/* Contact → scroll to skills/contact section */}
+            <NeonButton
+              label="Contact"
+              hoverText="Let's Talk"
+              variant="ghost"
+              onClick={() => scrollToSection('skills')}
+            />
           </motion.div>
         </div>
 
-        {/* Right content */}
-        <div className="flex-1 relative min-h-[450px] sm:min-h-[500px] md:min-h-0">
+        {/* Right — 3D Robot */}
+        <div className="flex-1 relative min-h-[400px] md:min-h-0 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-20 pointer-events-none md:hidden" />
           
-          {/* Hero Portrait with dark cinematic blending */}
           <motion.div 
             initial={{ opacity: 0, scale: 1.1 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -114,7 +164,7 @@ export function SplineSceneBasic() {
 
           <SplineScene 
             scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full relative z-10 scale-[1.35] sm:scale-125 md:scale-100 origin-center"
+            className="w-full h-full relative z-10 scale-[1.1] sm:scale-125 md:scale-100 origin-center"
           />
         </div>
       </div>
